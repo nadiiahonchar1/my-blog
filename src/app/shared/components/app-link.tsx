@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styles from './app-link.module.css';
 
 export function MyLink({
   children,
@@ -7,5 +8,9 @@ export function MyLink({
   children: React.ReactNode;
   href: string;
 }) {
-  return <Link href={href}>{children}</Link>;
+  return (
+    <Link className={styles.root} href={href}>
+      {children}
+    </Link>
+  );
 }
