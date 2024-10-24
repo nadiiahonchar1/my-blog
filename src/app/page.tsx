@@ -1,4 +1,5 @@
 import { getAllArticles } from './(server)/api';
+import { ArticlePreview } from './(server)/ArticlePreview';
 import { ROUTING } from './routing';
 import { MyLink } from './shared/components/app-link';
 const ARTICLES_PER_PAGE = 10;
@@ -37,19 +38,6 @@ export default async function Home({
       </ul>
       <MyLink href={prevPageUrl}>Prev</MyLink>
       <MyLink href={nextPageUrl}>Next</MyLink>
-    </>
-  );
-}
-
-type ArticlePreviewProps = {
-  name: string;
-  text: string;
-};
-function ArticlePreview({ name, text }: ArticlePreviewProps) {
-  return (
-    <>
-      <MyLink href={ROUTING.article(name)}>{text}</MyLink>
-      <button type="button">Like</button>
     </>
   );
 }
