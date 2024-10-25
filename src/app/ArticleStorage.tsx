@@ -1,19 +1,27 @@
 'use client';
-import { getLikeKey } from './(server)/ArticlePreview';
+
+const getLikeKey = (articleName: string) => `my_blog_like${articleName}`;
 
 class ArticleStorage {
-  constructor(private readonly _storage: Storage) {}
+  private get storage() {
+    return localStorage;
+  }
+
+  private get isStorageReady() {
+    return 'localStorage' in globalThis;
+  }
+
   like(articleName: string) {
     const likeKey = getLikeKey(articleName);
-    localStorage.setItem(likeKey, 'like');
+    this.storage.setItem(likeKey, 'like');
   }
   liked(articleName: string): boolean {
-    if (!this._storage) {
+    if (!this.isStorageReady) {
       return false;
     }
     const likeKey = getLikeKey(articleName);
-    return localStorage.getItem(likeKey) === 'like';
+    return this.storage.getItem(likeKey) === 'like';
   }
 }
 
-export const articleStorage = new ArticleStorage(localStorage);
+export const articleStorage = new ArticleStorage();
