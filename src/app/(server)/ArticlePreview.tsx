@@ -9,7 +9,7 @@ type ArticlePreviewProps = {
   text: string;
 };
 
-const getLikeKey = (articleName: string) => `my_blog_like${articleName}`;
+export const getLikeKey = (articleName: string) => `my_blog_like${articleName}`;
 
 export function ArticlePreview({ name, text }: ArticlePreviewProps) {
   const [liked, setLiked] = useState(false);
